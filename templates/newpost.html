@@ -1,28 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>Add A Blog Entry</h1>
-<form action="/blog" method='post'>
-    <table>
-       <tr>
-            <td><label for="title">Title:</label> {{ title_error }}</td><br>
-            <td>
-                <input name="title" type="text" placeholder="Add Your Blog Title" value="{{ title }}" />
-            </td>
-        </tr>
-        <tr>
-            <td><label for="body">Body:</label> {{ body_error }}</td><br>
-            <td>
-                <textarea name="body" rows="10" cols="30" placeholder="Add Your Blog Content" value="{{ body }}" /></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Add Blog"></td>
-        </tr>
-    </table>
-</form>
-
-<hr />
-
+    <h1>Add a Blog Entry</h1>
+    <form action="/newpost" id="new_post" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="title">Title for your new blog:</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="title" type="text" value="{{ title }}"/>
+                    <span>{{ title_error }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                        <br /><label for="body">Your new blog:</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea name="body" form="new_post" rows="15" cols="45">{{ body }}</textarea>
+                    <span>{{ body_error }}</span>
+                </td>
+            </tr>
+        </table>
+        <br /><input type="submit" value="Add Entry" />
+    </form> 
+</main>
 {% endblock %}

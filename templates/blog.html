@@ -1,27 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-{% if blogs|length == 0 %}
-    <p>No blogs yet</p>
+    {% if blogs|length == 0 %}
+        <h1>{{ title }}</h1>
+        <p>No blogs yet</p>
     {% else %}
-
-        <ul>
+        {% if not request.args.get('id') %}
+            <h1>{{ title }}</h1>
             {% for blog in blogs %}
-            <li>{{blog.title}}
-                <br><br>
-                {{blog.body}}
-<!--                <form method = "POST" action="/delete-task" style="display:inline-block;">  -->
-                    <form method = "POST" action="/newpost" style="display:inline-block;">
-                    <input type="hidden" name="blog-id" Value="{{blog.id}}" />
-                    <input type="submit" value="Done!" />
-                </form>
-            </li>
+                <h2><a href="/blog?id={{ blog.id }}">{{ blog.title }}</a></h2>
+                <p>{{ blog.body }}</p>
             {% endfor %}
-        </ul>
-
+        {% else %}
+            {% for blog in blogs %}
+                <h2>{{ blog.title }}</h2>
+                <p>{{ blog.body }}</p>
+            {% endfor %}
+        {% endif %}
+    </main>
     {% endif %}
-
-    <hr />
-
 {% endblock %}
